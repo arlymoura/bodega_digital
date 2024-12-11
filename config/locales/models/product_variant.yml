@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      product_variant:
+        one: "Produto SKU"
+        other: "Produto SKUs"
+    attributes:
+      product_variant:
+        name: "Nome"
+        description: "Descrição"
+        status: "Status"
+    enums:
+      product_variant:
+        status:
+          active: "Ativo"
+          disabled: "Desativado"
+          scheduled: "Agendado"
+

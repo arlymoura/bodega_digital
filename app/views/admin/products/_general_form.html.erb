@@ -1,0 +1,397 @@
+<div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
+  <div class="d-flex flex-column gap-7 gap-lg-10">
+    <!--begin::General options-->
+      <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+              <div class="card-title">
+                  <h2>Principal</h2>
+              </div>
+          </div>
+          <!--end::Card header-->
+
+          <!--begin::Card body-->
+          <div class="card-body pt-0">
+              <!--begin::Input group-->
+              <div class="mb-10 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label class="required form-label">Nome do Produto</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                    <%= f.text_field :name, class: "form-control mb-2", placeholder: "Nome do Produto"  %>
+                  <!--end::Input-->
+
+                  <!--begin::Description-->
+                  <div class="text-muted fs-7">É necessário e recomendado que o nome do produto seja único.</div>
+                  <!--end::Description-->
+                  <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                  </div>
+              </div>
+              <!--end::Input group-->
+
+              <!--begin::Input group-->
+              <div>
+                  <!--begin::Label-->
+                  <label class="form-label">Description</label>
+                  <!--end::Label-->
+
+                  <!--begin::Editor-->
+                  <%= f.text_area :description, class: "form-control mb-2", placeholder: "Descrição do Produto"  %>
+                  <!--end::Editor -->
+
+                  <!--begin::Description-->
+                  <div class="text-muted fs-7">Defina uma descrição para o produto para melhor visibilidade..</div>
+                  <!--end::Description-->
+              </div>
+              <!--end::Input group-->
+          </div>
+          <!--end::Card header-->
+      </div>
+    <!--end::General options-->
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <!--begin::Thumbnail settings-->
+        <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h2>Foto de Capa</h2>
+            </div>
+            <!--end::Card title-->
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body text-center pt-0">
+            <!--begin::Image input-->
+            <!--begin::Image input placeholder-->
+            <style>
+              .image-input-placeholder {
+                background-image: url('assets/media/svg/files/blank-image.svg');
+              }
+
+              [data-bs-theme="dark"] .image-input-placeholder {
+                background-image: url('assets/media/svg/files/blank-image-dark.svg');
+              }
+            </style>
+            <!--end::Image input placeholder-->
+            <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3"
+              data-kt-image-input="true">
+              <!--begin::Preview existing avatar-->
+              <div class="image-input-wrapper w-150px h-150px"></div>
+              <!--end::Preview existing avatar-->
+              <!--begin::Label-->
+              <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Trocar Imagem">
+                <i class="ki-duotone ki-pencil fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+                <!--begin::Inputs-->
+                  <%= f.file_field :thumbnail, class: "form-control ", placeholder: "Imagem", accept: ".png, .jpg, .jpeg"   %>
+                  <input type="hidden" name="avatar_remove" />
+                <!--end::Inputs-->
+              </label>
+              <!--end::Label-->
+              <!--begin::Cancel-->
+              <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                <i class="ki-duotone ki-cross fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </span>
+              <!--end::Cancel-->
+              <!--begin::Remove-->
+              <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                <i class="ki-duotone ki-cross fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </span>
+              <!--end::Remove-->
+            </div>
+            <!--end::Image input-->
+            <!--begin::Description-->
+            <div class="text-muted fs-7">Defina a imagem de capa do produto. Somente arquivos de imagem *.png, *.jpg e *.jpeg são aceitos</div>
+            <!--end::Description-->
+          </div>
+          <!--end::Card body-->
+        </div>
+        <!--end::Thumbnail settings-->
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <!--begin::General Status produto-->
+          <div class="card card-flush py-4 min-h-100">
+              <!--begin::Card header-->
+              <div class="card-header">
+                  <div class="card-title">
+                      <h2>Tipo</h2>
+                  </div>
+              </div>
+              <!--end::Card header-->
+
+              <!--begin::Card body-->
+              <div class="card-body pt-0">
+                <!--begin::Select2-->
+                <%= f.select :kind,
+                    Product.kinds.keys.map { |key| [key.titleize, key] },
+                    { include_blank: "Selecione uma opção" },
+                    { class: "form-select mb-2 select2-hidden-accessible",
+                      data: { control: "select2", hide_search: "true" },
+                      required: true
+                    } %>
+
+                  <!--end::Select2-->
+
+                  <!--begin::Description-->
+                  <div class="text-muted fs-7">Selecione a tipo do produto</div>
+                  <!--end::Description-->
+              </div>
+              <!--end::Card header-->
+          </div>
+        <!--end::General Status produto-->
+      </div>
+
+      <div class="col-md-4 mb-3 " >
+        <!--begin::General Status produto-->
+          <div class="card card-flush py-4 min-h-100">
+              <!--begin::Card header-->
+              <div class="card-header">
+                  <div class="card-title">
+                      <h2>Categoria</h2>
+                  </div>
+              </div>
+              <!--end::Card header-->
+
+              <!--begin::Card body-->
+              <div class="card-body pt-0">
+                <!--begin::Select2-->
+                  <%= f.select :category_id,
+                    Category.all.map{|c| [c.name.capitalize, c.id]},
+                    { include_blank: "Selecione uma opção" },
+                    { class: "form-select mb-2 select2-hidden-accessible",
+                      data: { control: "select2", hide_search: "true" },
+                      required: true
+                    } %>
+                  <!--end::Select2-->
+
+                  <!--begin::Description-->
+                  <div class="text-muted fs-7">Selecione a categoria do produto</div>
+                  <!--end::Description-->
+              </div>
+              <!--end::Card header-->
+          </div>
+        <!--end::General Status produto-->
+      </div>
+    </div>
+
+    <!--begin::Pricing-->
+    <%= f.fields_for :product_variants do |variation_form| %>
+      <div class="row">
+        <div class="col-md-6 mb-3 " >
+          <div class="card card-flush py-4 min-h-100">
+            <!--begin::Card header-->
+            <div class="card-header">
+              <div class="card-title">
+                <h2>Detalhes</h2>
+              </div>
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+              <!--begin::Input group-->
+              <div class="mb-3">
+                <%= variation_form.label :properties_type, "Tipo", class: "form-label" %>
+                <%= variation_form.text_field :properties,
+                      name: "product[product_variants_attributes][0][properties][type]",
+                      class: "form-control",
+                      placeholder: "Digite o tipo(Tamanho, Cor, Outros)",
+                      required: true %>
+              </div>
+
+              <div class="mb-3">
+                <%= variation_form.label :properties_value, "Valor", class: "form-label" %>
+                <%= variation_form.text_field :properties,
+                      name: "product[product_variants_attributes][0][properties][value]",
+                      class: "form-control",
+                      placeholder: "Digite o valor(Grande, Azul, Outros)",
+                      required: true %>
+              </div>
+              <!--end::Input group-->
+            </div>
+            <!--end::Card header-->
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3 " >
+          <div class="card card-flush py-4 min-h-100">
+        <!--begin::Card header-->
+        <div class="card-header">
+          <div class="card-title">
+            <h2>Detalhes Adicionais</h2>
+          </div>
+        </div>
+        <!--end::Card header-->
+
+        <!--begin::Card body-->
+        <div class="card-body pt-0">
+          <div class="row gy-3">
+            <div class="col-md-4">
+              <!--begin::Input group-->
+              <div class="mb-10 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="form-label">SKU</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                  <%= variation_form.text_field :sku, class: "form-control mb-2", placeholder: "SKU Numero", required: false %>
+                <!--end::Input-->
+
+                <!--begin::Description-->
+                <div class="text-muted fs-7">Insira o SKU do produto</div>
+                <!--end::Description-->
+                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                </div>
+              </div>
+            </div>
+            <!--end::Input group-->
+
+            <div class="col-md-4">
+              <!--begin::Input group-->
+              <div class="mb-10 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="form-label">Código de barras</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                  <%= variation_form.text_field :barcode, class: "form-control mb-2", placeholder: "Codigo de Barras", required: false %>
+                <!--end::Input-->
+
+                <!--begin::Description-->
+                <div class="text-muted fs-7">Insira o Código de barras do produto</div>
+                <!--end::Description-->
+                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                </div>
+              </div>
+              <!--end::Input group-->
+            </div>
+
+            <div class="col-md-4">
+              <!--begin::Input group-->
+              <div class="mb-10 fv-row fv-plugins-icon-container">
+                <!--begin::Label-->
+                <label class="form-label">EAN</label>
+                <!--end::Label-->
+
+                <!--begin::Input-->
+                  <%= variation_form.text_field :ean, class: "form-control mb-2", placeholder: "Codigo Ean", required: false %>
+                <!--end::Input-->
+
+                <!--begin::Description-->
+                <div class="text-muted fs-7">Insira o EAN do produto</div>
+                <!--end::Description-->
+                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                </div>
+              </div>
+              <!--end::Input group-->
+            </div>
+          </div>
+        </div>
+        <!--end::Card header-->
+      </div>
+        </div>
+      </div>
+
+      <!--begin::Inventory-->
+        <%= variation_form.fields_for :stock_items do |stock_item_form| %>
+        <%= stock_item_form.hidden_field :stock_id, value: Stock.first.id %> <!-- This is a temporary solution -->
+          <div class="card card-flush py-4 min-h-100">
+              <!--begin::Card header-->
+              <div class="card-header">
+                <div class="card-title">
+                  <h2>Preço</h2>
+                </div>
+              </div>
+              <!--end::Card header-->
+
+              <!--begin::Card body-->
+              <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="row gy-3">
+
+                  <div class="col-md-4">
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="required form-label">Preço</label>
+                      <!--end::Label-->
+
+                      <!--begin::Input-->
+                        <%= stock_item_form.number_field :price, class: "form-control mb-2", placeholder: "Preço do Produto", required: true, pattern: "^\d*(\.\d{0,2})?$", step: "0.01" %>
+                      <!--end::Input-->
+
+                      <!--begin::Description-->
+                      <div class="text-muted fs-7">Defina o preço do produto.</div>
+                      <!--end::Description-->
+                      <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                      </div>
+                    </div>
+                  </div>
+                  <!--end::Input group-->
+
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="required form-label">Quantidade</label>
+                      <!--end::Label-->
+
+                      <!--begin::Input-->
+                        <%= stock_item_form.number_field :quantity, class: "form-control mb-2", placeholder: "Quantidade", required: false %>
+                      <!--end::Input-->
+
+                      <!--begin::Description-->
+                      <div class="text-muted fs-7">Insira a Quantidade em estoque</div>
+                      <!--end::Description-->
+                      <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                      </div>
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="required form-label">Quantidade Minima</label>
+                      <!--end::Label-->
+
+                      <!--begin::Input-->
+                        <%= stock_item_form.number_field :min_quantity, class: "form-control mb-2", placeholder: "Quantidade Minima", required: false %>
+                      <!--end::Input-->
+
+                      <!--begin::Description-->
+                      <div class="text-muted fs-7">Insira a Quantidade minima em estoque</div>
+                      <!--end::Description-->
+                      <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                      </div>
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+                </div>
+              </div>
+              <!--end::Card header-->
+            </div>
+        <% end%>
+        <!--end::Inventory-->
+    <% end %>
+    <!--end::Pricing-->
+
+
+
+  </div>
+</div>

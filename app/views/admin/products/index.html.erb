@@ -1,0 +1,103 @@
+<% content_for :title do %>
+  <%= Product.model_name.human %> - Lista
+<% end %>
+
+<% content_for :page_title do %>
+  <%= Product.model_name.human %>
+<% end %>
+
+<% content_for :page_title_li_content do %>
+  <li class="breadcrumb-item text-muted">
+    <a href="/admin/dashboards" class="text-muted
+    text-hover-primary">Home</a>
+  </li>
+  <li class="breadcrumb-item">
+    <span class="bullet bg-gray-500 w-5px h-2px"></span>
+  </li>
+  <li class="breadcrumb-item text-muted">
+    <a href="/admin/stocks" class="text-muted
+    text-hover-primary"><%= Product.model_name.human %></a>
+  </li>
+  <li class="breadcrumb-item">
+    <span class="bullet bg-gray-500 w-5px h-2px"></span>
+  </li>
+  <li class="breadcrumb-item text-muted">Lista</li>
+<% end %>
+
+<% content_for :toolbar_button do %>
+  <a href=<%= new_admin_product_path %> class="btn btn-success" >Criar</a>
+<% end %>
+
+
+<% content_for :layout do %>
+
+<div id="kt_app_content" class="app-content flex-column-fluid">
+  <!--begin::teams-->
+  <div class="card card-flush">
+    <!--begin::Card header-->
+    <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+      <!--begin::Card title-->
+      <div class="card-title">
+        <!--begin::Search-->
+        <div class="d-flex align-items-center position-relative my-1">
+          <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
+          <input
+            type="text"
+            data-kt-ecommerce-team-filter="search"
+            class="form-control form-control-solid w-250px ps-12"
+            placeholder="Pesquisar Produto"
+          />
+        </div>
+        <!--end::Search-->
+      </div>
+      <!--end::Card title-->
+
+      <!--begin::Card toolbar-->
+
+      <!--end::Card toolbar-->
+    </div>
+    <!--end::Card header-->
+
+    <!--begin::Card body-->
+    <div class="card-body pt-0">
+      <!--begin::Table-->
+      <div
+        id="kt_ecommerce_teams_table_wrapper"
+        class="dt-container dt-bootstrap5 dt-empty-footer"
+      >
+        <div id="" class="table-responsive">
+          <table
+            class="table align-middle table-row-dashed fs-6 gy-5 dataTable"
+            id="kt_ecommerce_teams_table"
+
+          >
+            <colgroup>
+
+            </colgroup>
+            <thead>
+              <%= render 'table_header' %>
+            </thead>
+            <tbody class="fw-semibold text-gray-600">
+              <%= render 'table_body', products: @products %>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+        <div id="" class="row">
+          <div id="" class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start dt-toolbar" >
+          </div>
+          <div id="" class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end" >
+            <%= will_paginate @products, renderer: CustomLinkRenderer %>
+          </div>
+        </div>
+      </div>
+      <!--end::Table-->
+    </div>
+    <!--end::Card body-->
+  </div>
+  <!--end::teams-->
+</div>
+<!--end::Hero-->
+
+<% end %>
+<%= render template: "#{Rails.configuration.settings.KT_THEME_LAYOUT_DIR}/default" %>

@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      stock:
+        one: "Estoque"
+        other: "Estoques"
+    attributes:
+      stock:
+        name: "Nome"
+        description: "Descrição"
+        status: "Status"
+    enums:
+      stock:
+        status:
+          active: "Ativo"
+          disabled: "Desativado"

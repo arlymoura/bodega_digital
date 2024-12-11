@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      category:
+        one: "Categoria"
+        other: "Categorias"
+    attributes:
+      category:
+        name: "Nome"
+        description: "Descrição"
+        status: "Status"
+    enums:
+      category:
+        status:
+          active: "Ativo"
+          deactivate: "Desativado"

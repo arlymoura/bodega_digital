@@ -1,0 +1,92 @@
+<%= form_with(model: [:admin, category]) do |form| %>
+  <% if category.errors.any? %>
+    <%= render "shared/form_errors", record: category %>
+  <% end %>
+
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <% if action_name == 'edit' %>
+        <h3 class="card-title">Editar</h3>
+      <% else %>
+        <h3 class="card-title">Criar</h3>
+      <% end %>
+        <div class="card-toolbar">
+        </div>
+    </div>
+    <div class="card-body">
+      <div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Nome</label>
+        <%= form.text_field :name, class: "form-control ", placeholder: "Digite o nome"  %>
+      </div>
+      <div class="mb-10">
+        <label for="exampleFormControlInput1" class="required form-label">Descrição</label>
+        <%= form.text_field :description, class: "form-control ", placeholder: "Digite uma descrição"  %>
+      </div>
+
+      <div>
+        <!--begin::Image input-->
+            <!--begin::Image input placeholder-->
+            <style>
+              .image-input-placeholder {
+                background-image: url('assets/media/svg/files/blank-image.svg');
+              }
+
+              [data-bs-theme="dark"] .image-input-placeholder {
+                background-image: url('assets/media/svg/files/blank-image-dark.svg');
+              }
+            </style>
+            <!--end::Image input placeholder-->
+            <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3"
+              data-kt-image-input="true">
+              <!--begin::Preview existing avatar-->
+              <div class="image-input-wrapper w-150px h-150px"></div>
+              <!--end::Preview existing avatar-->
+              <!--begin::Label-->
+              <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Trocar Imagem">
+                <i class="ki-duotone ki-pencil fs-7">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+                <!--begin::Inputs-->
+                  <%= form.file_field :thumbnail, class: "form-control ", placeholder: "Imagem", accept: ".png, .jpg, .jpeg"   %>
+                  <input type="hidden" name="avatar_remove" />
+                <!--end::Inputs-->
+              </label>
+              <!--end::Label-->
+              <!--begin::Cancel-->
+              <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                <i class="ki-duotone ki-cross fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </span>
+              <!--end::Cancel-->
+              <!--begin::Remove-->
+              <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                <i class="ki-duotone ki-cross fs-2">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </span>
+              <!--end::Remove-->
+            </div>
+            <!--end::Image input-->
+            <!--begin::Description-->
+            <div class="text-muted fs-7">Defina a imagem de capa do produto. Somente arquivos de imagem *.png, *.jpg e *.jpeg são aceitos</div>
+            <!--end::Description-->
+      </div>
+    </div>
+    <div class="card-footer">
+      <%= link_to "Voltar", admin_categories_path, class: "btn btn-danger" %>
+
+      <% if action_name == 'edit' %>
+        <%= form.submit "Salvar", class: "btn btn-success" %>
+      <% else %>
+        <%= form.submit "Criar", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

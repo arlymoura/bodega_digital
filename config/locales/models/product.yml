@@ -1,0 +1,25 @@
+pt-BR:
+  activerecord:
+    models:
+      product:
+        one: "Produto"
+        other: "Produto"
+    attributes:
+      product_variant:
+        name: "Nome"
+        description: "Descrição"
+        status: "Status"
+        kind: "Tipo"
+    enums:
+      product:
+        status:
+          active: "Ativo"
+          disabled: "Desativado"
+          out: "Esgotado"
+        kind:
+          shoe: "Calçado"
+          clothing: "Vestuário"
+          food: "Alimento"
+          drink: "Bebida"
+          electronics: "Eletrônicos"
+          other: "Outros"

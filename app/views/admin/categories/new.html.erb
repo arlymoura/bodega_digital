@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  <%= Category.model_name.human %> - Criar
+<% end %>
+
+<% content_for :page_title do %>
+  <%= Category.model_name.human %>
+<% end %>
+
+<% content_for :page_title_li_content do %>
+  <li class="breadcrumb-item text-muted">
+    <a href="/admin/dashboards" class="text-muted
+    text-hover-primary">Home</a>
+  </li>
+  <li class="breadcrumb-item">
+    <span class="bullet bg-gray-500 w-5px h-2px"></span>
+  </li>
+  <li class="breadcrumb-item text-muted">
+    <a href="/admin/stocks" class="text-muted
+    text-hover-primary"><%= Category.model_name.human %></a>
+  </li>
+  <li class="breadcrumb-item">
+    <span class="bullet bg-gray-500 w-5px h-2px"></span>
+  </li>
+  <li class="breadcrumb-item text-muted">Criar</li>
+<% end %>
+
+<% content_for :toolbar_button do %>
+
+<% end %>
+
+
+<% content_for :layout do %>
+  <%= render "form", category: @category %>
+<% end %>
+
+<%= render template: "#{Rails.configuration.settings.KT_THEME_LAYOUT_DIR}/default" %>
