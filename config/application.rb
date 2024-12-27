@@ -31,5 +31,6 @@ module Keenthemes
     end
 
     config.autoload_paths << Rails.root.join('lib')
+    config.assets.initialize_on_precompile = false
   end
 end
