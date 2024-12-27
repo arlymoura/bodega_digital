@@ -4,6 +4,9 @@ class CreateTables < ActiveRecord::Migration[7.0]
       t.integer :number
       t.integer :status
       t.boolean :is_virtual, default: false, null: false
+      t.datetime :occupied_at
+      t.datetime :closed_at
+      t.references :member, null: true, foreign_key: true, type: :uuid
 
       t.timestamps
     end
