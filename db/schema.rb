@@ -172,15 +172,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_27_181135) do
     t.index ["member_id"], name: "index_tables_on_member_id"
   end
 
-  create_table "teams", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.date "founded_on"
-    t.string "location"
-    t.text "history"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
