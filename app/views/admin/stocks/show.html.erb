@@ -1,9 +1,9 @@
 <% content_for :title do %>
-  <%= Stock.model_name.human %> - Listar
+  <%= Stock.model_name.human %> - Lista de Produtos
 <% end %>
 
 <% content_for :page_title do %>
-  <%= Stock.model_name.human %>
+  <%= @stock.name %>
 <% end %>
 
 <% content_for :page_title_li_content do %>
@@ -25,7 +25,7 @@
 <% end %>
 
 <% content_for :toolbar_button do %>
-  <a href=<%= new_admin_stock_path %> class="btn btn-success" > Criar </a>
+  <a href=<%= new_admin_product_path %> class="btn btn-success" >Criar</a>
 <% end %>
 
 
@@ -75,10 +75,10 @@
 
             </colgroup>
             <thead>
-              <%= render 'table_header' %>
+              <%= render 'show_table_header' %>
             </thead>
             <tbody class="fw-semibold text-gray-600">
-              <%= render 'table_body', stocks: @stocks %>
+              <%= render 'show_table_body', products: @products %>
             </tbody>
             <tfoot></tfoot>
           </table>
@@ -87,7 +87,7 @@
           <div id="" class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start dt-toolbar" >
           </div>
           <div id="" class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end" >
-            <%= will_paginate @stocks, renderer: CustomLinkRenderer %>
+            <%= will_paginate @products, renderer: CustomLinkRenderer %>
           </div>
         </div>
       </div>

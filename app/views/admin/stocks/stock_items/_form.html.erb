@@ -1,0 +1,39 @@
+<%= form_with(model: product, url: admin_stock_stock_item_path(stock_item, stock), method: :patch ) do |form| %>
+  <% if product.errors.any? %>
+    <%= render "shared/form_errors", record: product %>
+  <% end %>
+
+
+
+  <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+    <!--begin:::Tabs-->
+    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2"
+        role="tablist">
+        <!--begin:::Tab item-->
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab"
+                href="#kt_ecommerce_add_product_general" aria-selected="true" role="tab"></a>
+        </li>
+        <!--end:::Tab item-->
+
+    </ul>
+    <!--end:::Tabs-->
+    <!--begin::Tab content-->
+    <div class="tab-content">
+        <!--begin::Tab pane-->
+          <%= render 'admin/stocks/stock_items/general_form', f: form %>
+        <!--end::Tab pane-->
+    </div>
+    <!--end::Tab content-->
+
+    <div class="d-flex justify-content-end">
+      <%= link_to "Voltar", admin_stock_url(stock), class: "btn btn-danger me-5" %>
+
+      <% if action_name == 'edit' %>
+        <%= form.submit "Salvar", class: "btn btn-success" %>
+      <% else %>
+        <%= form.submit "Criar", class: "btn btn-success" %>
+      <% end %>
+    </div>
+</div>
+<% end %>

@@ -23,7 +23,7 @@ ActiveRecord::Base.transaction do
     a.role = 'admin'
   end
 
-  admin_maneger = Admin.find_or_create_by!(
+  admin_maneger = Member.find_or_create_by!(
     email: 'manager_time@time.com'
   ) do |a|
     a.name = Faker::Name.name
@@ -69,8 +69,7 @@ ActiveRecord::Base.transaction do
     product_variant = ProductVariant.create!(
       product: product,
       status: [:active, :disabled, :scheduled].sample,
-      properties: { type: "Tamanho", value: ['P', 'M', 'G', 'GG'].sample },
-      price: Faker::Commerce.price(range: 100.0..400.0)
+      properties: { type: "Tamanho", value: ['P', 'M', 'G', 'GG'].sample }
     )
 
     # create stock items
@@ -78,7 +77,8 @@ ActiveRecord::Base.transaction do
       product_variant: product_variant,
       stock: Stock.first,
       quantity: Faker::Number.between(from: 1, to: 100),
-      min_quantity: Faker::Number.between(from: 1, to: 20)
+      min_quantity: Faker::Number.between(from: 1, to: 20),
+      price: Faker::Commerce.price(range: 100.0..400.0)
     )
   end
 end

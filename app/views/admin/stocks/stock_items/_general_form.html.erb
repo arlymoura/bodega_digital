@@ -1,0 +1,170 @@
+<div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
+  <div class="d-flex flex-column gap-7 gap-lg-10">
+    <!--begin::General options-->
+      <div class="card card-flush py-4">
+          <!--begin::Card header-->
+          <div class="card-header">
+              <div class="card-title">
+                  <h2>Atualização de Estoque</h2>
+              </div>
+          </div>
+          <!--end::Card header-->
+
+          <!--begin::Card body-->
+          <div class="card-body pt-0">
+              <!--begin::Input group-->
+              <div class="mb-10 fv-row fv-plugins-icon-container">
+                  <!--begin::Label-->
+                  <label class="form-label">Nome do Produto</label>
+                  <!--end::Label-->
+
+                  <!--begin::Input-->
+                    <%= f.text_field :name, class: "form-control mb-2 form-control-solid", placeholder: "Nome do Produto", disabled: true  %>
+                  <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+
+              <%= f.fields_for :product_variants do |variation_form| %>
+                <div class="row gy-3">
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="form-label">SKU</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                        <%= variation_form.text_field :sku, class: "form-control mb-2", placeholder: "SKU Numero", required: false, disabled: true %>
+                      <!--end::Input-->
+                      <!--begin::Description-->
+                      <!--end::Description-->
+                    </div>
+                  </div>
+                  <!--end::Input group-->
+
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="form-label">Código de barras</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                        <%= variation_form.text_field :barcode, class: "form-control mb-2", placeholder: "Codigo de Barras", required: false, disabled: true %>
+                      <!--end::Input-->
+                      <!--begin::Description-->
+                      <!--end::Description-->
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="form-label">EAN</label>
+                      <!--end::Label-->
+                      <!--begin::Input-->
+                        <%= variation_form.text_field :ean, class: "form-control mb-2", placeholder: "Codigo Ean", required: false, disabled: true %>
+                      <!--end::Input-->
+                      <!--begin::Description-->
+                      <!--end::Description-->
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+                </div>
+              <% end %>
+          </div>
+          <!--end::Card header-->
+      </div>
+    <!--end::General options-->
+
+    <!--begin::Pricing-->
+    <%= f.fields_for :product_variants do |variation_form| %>
+      <div class="row">
+      <!--begin::Inventory-->
+        <%= variation_form.fields_for :stock_items do |stock_item_form| %>
+        <%= stock_item_form.hidden_field :stock_id, value: Stock.first.id %> <!-- This is a temporary solution -->
+          <div class="card card-flush py-4 min-h-100">
+              <!--begin::Card header-->
+              <div class="card-header">
+                <div class="card-title">
+                  <h2>Preço</h2>
+                </div>
+              </div>
+              <!--end::Card header-->
+
+              <!--begin::Card body-->
+              <div class="card-body pt-0">
+                  <!--begin::Input group-->
+                  <div class="row gy-3">
+
+                  <div class="col-md-4">
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="required form-label">Preço</label>
+                      <!--end::Label-->
+
+                      <!--begin::Input-->
+                        <%= stock_item_form.number_field :price, class: "form-control mb-2", placeholder: "Preço do Produto", required: true, pattern: "^\d*(\.\d{0,2})?$", step: "0.01"%>
+                      <!--end::Input-->
+
+                      <!--begin::Description-->
+                      <div class="text-muted fs-7">Defina o preço do produto.</div>
+                      <!--end::Description-->
+                      <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                      </div>
+                    </div>
+                  </div>
+                  <!--end::Input group-->
+
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="required form-label">Quantidade</label>
+                      <!--end::Label-->
+
+                      <!--begin::Input-->
+                        <%= stock_item_form.number_field :quantity, class: "form-control mb-2", placeholder: "Quantidade", required: false %>
+                      <!--end::Input-->
+
+                      <!--begin::Description-->
+                      <div class="text-muted fs-7">Insira a Quantidade em estoque</div>
+                      <!--end::Description-->
+                      <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                      </div>
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+
+                  <div class="col-md-4">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row fv-plugins-icon-container">
+                      <!--begin::Label-->
+                      <label class="required form-label">Quantidade Minima</label>
+                      <!--end::Label-->
+
+                      <!--begin::Input-->
+                        <%= stock_item_form.number_field :min_quantity, class: "form-control mb-2", placeholder: "Quantidade Minima", required: false %>
+                      <!--end::Input-->
+
+                      <!--begin::Description-->
+                      <div class="text-muted fs-7">Insira a Quantidade minima em estoque</div>
+                      <!--end::Description-->
+                      <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                      </div>
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+                </div>
+              </div>
+              <!--end::Card header-->
+            </div>
+        <% end%>
+        <!--end::Inventory-->
+    <% end %>
+    <!--end::Pricing-->
+
+
+  </div>
+  </div>
+</div>
