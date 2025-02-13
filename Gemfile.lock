@@ -66,9 +66,14 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    acts_as_tenant (1.0.1)
+      rails (>= 6.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
+    audited (5.8.0)
+      activerecord (>= 5.2, < 8.2)
+      activesupport (>= 5.2, < 8.2)
     backport (1.2.0)
     bcrypt (3.1.20)
     benchmark (0.3.0)
@@ -100,6 +105,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
+    discard (1.4.0)
+      activerecord (>= 4.2, < 9.0)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
       dotenv (= 3.1.2)
@@ -257,6 +264,7 @@ GEM
       nokogiri
     rexml (3.3.1)
       strscan
+    rolify (6.0.1)
     rubocop (1.64.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -371,10 +379,13 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  acts_as_tenant
+  audited
   bootsnap
   capybara
   debug
   devise
+  discard (~> 1.4)
   dotenv-rails
   factory_bot_rails
   faker
@@ -388,6 +399,7 @@ DEPENDENCIES
   rails (~> 7.0.3, >= 7.0.3.1)
   rails-erd
   ransack
+  rolify
   rubocop
   ruby-lsp
   ruby-lsp-rails

@@ -1,11 +1,12 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-
   def after_sign_in_path_for(resource)
-    if resource.is_a?(Member)
-      # @current_store = resource.stores.first if resource.owner?
-      admin_root_path
-    elsif resource.is_a?(User)
+    if resource.is_a?(User)
+        # TODO: 'retornar aqui para usuarios com multiplas empresas, ajustar para retornar para a empresa correta'
+        # @current_company = resource.memberships.first.company 
+        resource.current_company = resource.memberships.first.company
+        admin_root_path
+      
+    elsif resource.is_a?(Customer)
       root_path
     else
       super

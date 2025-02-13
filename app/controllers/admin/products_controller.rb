@@ -1,5 +1,6 @@
 module Admin
   class ProductsController < Admin::ApplicationController
+    before_action :authenticate_user!
     before_action :set_product, only: %i[show edit update destroy]
 
     def initialize
@@ -13,7 +14,7 @@ module Admin
 
     # GET /admin/products or /admin/products.json
     def index
-      @products = Product.includes(product_variants: :stock_items).paginate(page: params[:page], per_page: 11)
+      @products = Product.includes(variants: :stock_items).paginate(page: params[:page], per_page: 11)
     end
 
     # GET /admin/products/1 or /admin/products/1.json
@@ -22,8 +23,8 @@ module Admin
     # GET /admin/products/new
     def new
       @product = Product.new(kind: :shoes, status: :active)
-      product_variant = @product.product_variants.build
-      product_variant.stock_items.build(stock: Stock.first)
+      variant = @product.variants.build
+      variant.stock_items.build(stock: Stock.first)
     end
 
     # GET /admin/products/1/edit
@@ -80,12 +81,12 @@ module Admin
     def product_params
       params.require(:product).permit(
         :name, :description, :thumbnail, :category_id, :kind, :status,
-        product_variants_attributes: [
+        variants_attributes: [
           :id, :product_id, :sku, :barcode, :ean,
           { properties: [:type, :value] },
           :_destroy,
           { stock_items_attributes: [
-            :id, :product_variant_id, :stock_id, :quantity, :min_quantity, :price, :_destroy
+            :id, :variant_id, :stock_id, :quantity, :min_quantity, :price, :_destroy
           ] }
         ]
       )

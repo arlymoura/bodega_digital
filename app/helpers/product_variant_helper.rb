@@ -1,5 +1,5 @@
 module ProductVariantHelper
-  def product_variant_status_badge(status)
+  def variant_status_badge(status)
     badge_class = case status.to_sym
                   when :active
                     "badge-light-success"
@@ -11,10 +11,10 @@ module ProductVariantHelper
                     "badge-light-secondary"
                   end
 
-    content_tag(:span, product_variant_status_translations(status), class: "badge #{badge_class}")
+    content_tag(:span, variant_status_translations(status), class: "badge #{badge_class}")
   end
 
-  def product_variant_status_translations(status)
-    I18n.t("activerecord.enums.product_variant.status.#{status}")
+  def variant_status_translations(status)
+    I18n.t("activerecord.enums.variant.status.#{status}")
   end
 end

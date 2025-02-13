@@ -20,10 +20,10 @@
     <td class="pe-0 dt-type-numeric">
       <span class="fw-bold"><%= product.name %></span>
     </td>
-    <td><span class="fw-bold"><%= product.product_variants.first.sku %></span></td>
-    <td class="text-center"><%= stock_item_status_badge(product.product_variants.first.stock_items.first) %></td>
-    <td>R$ <%= product.product_variants.first.price %></td>
-    <td><span class="fw-bold"><%= product_variant_status_badge(product.product_variants.first.status) %></span></td>
+    <td><span class="fw-bold"><%= product.variants.first.sku %></span></td>
+    <td class="text-center"><%= stock_item_status_badge(product.variants.first.stock_items.first) %></td>
+    <td>R$ <%= product.variants.first.price %></td>
+    <td><span class="fw-bold"><%= variant_status_badge(product.variants.first.status) %></span></td>
 
 
 
@@ -46,8 +46,8 @@
         <div class="menu-item px-3">
           <a
             href=<%= edit_admin_stock_stock_item_path(
-              product.product_variants.first.stock_items.first,
-              product.product_variants.first.stock_items.first.stock
+              product.variants.first.stock_items.first,
+              product.variants.first.stock_items.first.stock
             )%>
             class="menu-link px-3"
           >

@@ -12,39 +12,62 @@ require 'faker'
 
 
 ActiveRecord::Base.transaction do
+  # Criar Account
+  account = Account.create!(name: 'Grupo Teste')
+
+  # Criar Company
+  company = Company.find_or_create_by!(
+    name: 'Empresa Teste',
+    account_id: account.id
+  )
+
+  company2 = Company.find_or_create_by!(
+    name: 'Empresa Teste 2',
+    account_id: account.id
+  )
+
   # Criar Member
-  admin = Member.find_or_create_by!(
+  admin = User.find_or_create_by!(
     email: 'arlymoura@gmail.com'
   ) do |a|
     a.name = 'Arly Moura'
     a.password = '123456'
-    a.document = Faker::IDNumber.brazilian_citizen_number
+    a.document_number = Faker::IDNumber.brazilian_citizen_number
     a.document_type = 'CPF'
     a.role = 'admin'
   end
 
-  admin_maneger = Member.find_or_create_by!(
+
+  # Criar relação entre usuário e empresa
+  Membership.find_or_create_by!(
+    user: admin,
+    company_id: company.id,
+    role: :owner
+  )
+
+  admin_maneger = User.find_or_create_by!(
     email: 'manager_time@time.com'
   ) do |a|
     a.name = Faker::Name.name
     a.password = '123456'
-    a.document = Faker::IDNumber.brazilian_citizen_number
+    a.document_number = Faker::IDNumber.brazilian_citizen_number
     a.document_type = 'CPF'
     a.role = 'manager'
   end
 
-  # Criar Usuários
-  User.create!(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    password: 'password'
+  Membership.find_or_create_by!(
+    user: admin_maneger,
+    company_id: company2.id,
+    role: :member
   )
 
   # Criar Categorias
   5.times do
     Category.create!(
       name: Faker::Commerce.department(max: 1),
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.paragraph,
+      account_id: account.id,
+      company_id: company.id
     )
   end
 
@@ -52,7 +75,9 @@ ActiveRecord::Base.transaction do
 
   Stock.create!(
     name: 'Estoque Principal',
-    description: 'Estoque principal da loja'
+    description: 'Estoque principal da loja',
+    account_id: account.id,
+    company_id: company.id
   )
 
   # create products
@@ -62,23 +87,29 @@ ActiveRecord::Base.transaction do
       description: Faker::Lorem.paragraph,
       kind: Product.kinds.keys.sample,
       status: :active,
-      category: Category.all.sample
+      category: Category.all.sample,
+      account_id: account.id,
+      company_id: company.id
     )
 
     # create product variants
-    product_variant = ProductVariant.create!(
+    variant = Variant.create!(
       product: product,
       status: [:active, :disabled, :scheduled].sample,
-      properties: { type: "Tamanho", value: ['P', 'M', 'G', 'GG'].sample }
+      properties: { type: "Tamanho", value: ['P', 'M', 'G', 'GG'].sample },
+      account_id: account.id,
+      company_id: company.id
     )
 
     # create stock items
     StockItem.create!(
-      product_variant: product_variant,
+      variant: variant,
       stock: Stock.first,
       quantity: Faker::Number.between(from: 1, to: 100),
       min_quantity: Faker::Number.between(from: 1, to: 20),
-      price: Faker::Commerce.price(range: 100.0..400.0)
+      price: Faker::Commerce.price(range: 100.0..400.0),
+      account_id: account.id,
+      company_id: company.id
     )
   end
 end

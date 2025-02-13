@@ -1,10 +1,12 @@
 # frozen_literal: true
 
-class ProductVariant < ApplicationRecord
+class Variant < ApplicationRecord
   include ProductVariantDataGenerator
   include ImageResizer
   after_save :resize_and_store_imagens, if: :photo_attached?
 
+  belongs_to :account
+  belongs_to :company
   belongs_to :product
   has_many :stock_items, dependent: :destroy
   has_many :stocks, through: :stock_items
@@ -34,17 +36,6 @@ class ProductVariant < ApplicationRecord
 
   private
 
-  # def validate_properties
-  #   case product.kind
-  #   when "shoe"
-  #     errors.add(:properties, "must include size") unless properties["size"]
-  #     errors.add(:properties, "must include color") unless properties["color"]
-  #   when "shirt"
-  #     errors.add(:properties, "must include size and fit") unless properties["size"] && properties["fit"]
-  #   else
-  #     # Permitir flexibilidade para outros tipos de produtos
-  #   end
-  # end
   def photo_attached?
     imagens&.first&.attached?
   end

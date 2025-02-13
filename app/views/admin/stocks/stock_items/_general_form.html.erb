@@ -24,7 +24,7 @@
               </div>
               <!--end::Input group-->
 
-              <%= f.fields_for :product_variants do |variation_form| %>
+              <%= f.fields_for :variants do |variation_form| %>
                 <div class="row gy-3">
                   <div class="col-md-4">
                     <!--begin::Input group-->
@@ -78,7 +78,7 @@
     <!--end::General options-->
 
     <!--begin::Pricing-->
-    <%= f.fields_for :product_variants do |variation_form| %>
+    <%= f.fields_for :variants do |variation_form| %>
       <div class="row">
       <!--begin::Inventory-->
         <%= variation_form.fields_for :stock_items do |stock_item_form| %>

@@ -17,7 +17,7 @@ module Admin
 
     # GET /admin/products/1 or /admin/products/1.json
     def show
-      @products = @stock.products.includes(product_variants: :stock_items).paginate(page: params[:page], per_page: 11)
+      @products = @stock.products.includes(variants: :stock_items).paginate(page: params[:page], per_page: 11)
     end
 
     # GET /admin/products/new

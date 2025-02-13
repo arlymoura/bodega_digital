@@ -1,16 +1,16 @@
 pt-BR:
   activerecord:
     models:
-      product_variant:
+      variant:
         one: "Produto SKU"
         other: "Produto SKUs"
     attributes:
-      product_variant:
+      variant:
         name: "Nome"
         description: "Descrição"
         status: "Status"
     enums:
-      product_variant:
+      variant:
         status:
           active: "Ativo"
           disabled: "Desativado"

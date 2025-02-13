@@ -1,5 +1,7 @@
 module Admin
   class DashboardsController < Admin::ApplicationController
+    before_action :authenticate_user!
+
     def initialize
       super
       # Include the main layout bootstrap file

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :members
-  devise_for :users
-  # devise_for :admins
+  devise_for :customers
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   match '/404', to: 'system#not_found', via: :all
   match '/500', to: 'system#error', via: :all

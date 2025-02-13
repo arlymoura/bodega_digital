@@ -1,4 +1,4 @@
-# app/models/concerns/product_variant_data_generator.rb
+# app/models/concerns/variant_data_generator.rb
 module ProductVariantDataGenerator
   extend ActiveSupport::Concern
 
@@ -17,7 +17,7 @@ module ProductVariantDataGenerator
 
     loop do
       self.sku = SecureRandom.hex(6)
-      break unless ProductVariant.exists?(sku: sku)
+      break unless Variant.exists?(sku: sku)
     end
   end
 
@@ -26,7 +26,7 @@ module ProductVariantDataGenerator
 
     loop do
       self.ean = BarcodeGenerator.generate_ean13
-      break unless ProductVariant.exists?(ean: ean)
+      break unless Variant.exists?(ean: ean)
     end
   end
 
@@ -35,7 +35,7 @@ module ProductVariantDataGenerator
 
     loop do
       self.barcode = SecureRandom.hex(6)
-      break unless ProductVariant.exists?(barcode: barcode)
+      break unless Variant.exists?(barcode: barcode)
     end
   end
 end

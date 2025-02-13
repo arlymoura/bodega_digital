@@ -5,7 +5,7 @@ pt-BR:
         one: "Produto"
         other: "Produto"
     attributes:
-      product_variant:
+      variant:
         name: "Nome"
         description: "Descrição"
         status: "Status"

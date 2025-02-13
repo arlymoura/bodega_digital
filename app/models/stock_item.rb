@@ -1,9 +1,11 @@
 # frozen_literal: true
 
 class StockItem < ApplicationRecord
-  belongs_to :product_variant
+  belongs_to :account
+  belongs_to :company
+  belongs_to :variant
   belongs_to :stock
-  has_one :product, through: :product_variant
+  has_one :product, through: :variant
 
   # validates :quantity, numericality: { greater_than_or_equal_to: 0 }
 

@@ -1,9 +1,11 @@
 # frozen_literal: true
 
 class Stock < ApplicationRecord
+  belongs_to :account
+  belongs_to :company
   has_many :stock_items, dependent: :destroy
-  has_many :product_variants, through: :stock_items
-  has_many :products, through: :product_variants
+  has_many :variants, through: :stock_items
+  has_many :products, through: :variants
 
   enum status: { active: 0, disabled: 1 }
 

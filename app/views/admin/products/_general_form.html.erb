@@ -191,7 +191,7 @@
     </div>
 
     <!--begin::Pricing-->
-    <%= f.fields_for :product_variants do |variation_form| %>
+    <%= f.fields_for :variants do |variation_form| %>
       <div class="row">
         <div class="col-md-6 mb-3 " >
           <div class="card card-flush py-4 min-h-100">
@@ -208,7 +208,7 @@
               <div class="mb-3">
                 <%= variation_form.label :properties_type, "Tipo", class: "form-label" %>
                 <%= variation_form.text_field :properties,
-                      name: "product[product_variants_attributes][0][properties][type]",
+                      name: "product[variants_attributes][0][properties][type]",
                       class: "form-control",
                       placeholder: "Digite o tipo(Tamanho, Cor, Outros)",
                       required: true %>
@@ -217,7 +217,7 @@
               <div class="mb-3">
                 <%= variation_form.label :properties_value, "Valor", class: "form-label" %>
                 <%= variation_form.text_field :properties,
-                      name: "product[product_variants_attributes][0][properties][value]",
+                      name: "product[variants_attributes][0][properties][value]",
                       class: "form-control",
                       placeholder: "Digite o valor(Grande, Azul, Outros)",
                       required: true %>
